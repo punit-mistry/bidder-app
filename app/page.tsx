@@ -1,14 +1,14 @@
-/* eslint-disable react/no-unescaped-entities */
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/Gdl1jF3CzGg
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
+'use client'
 import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import Image from "next/image"
-export default function Component() {
+import { useRouter } from "next/navigation"
+import { userIsLoggedIn } from "@/utils/auth"
+import { Metadata } from 'next'
+
+export default function LandingPage() {
+ 
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <header className="px-4 lg:px-6 h-14 flex items-center">
@@ -71,7 +71,7 @@ export default function Component() {
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Streamline Your Bidding Experience</h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Bidder offers a seamless and secure platform for buying and selling diamonds. From easy diamond
-                  uploads to real-time bidding, we've got you covered.
+                  uploads to real-time bidding, we&apos;ve got you covered.
                 </p>
               </div>
             </div>
@@ -141,10 +141,10 @@ export default function Component() {
                       </div>
                     </div>
                     <p className="text-muted-foreground">
-                      "Bidder made the process of selling my diamonds so easy
+                      Bidder made the process of selling my diamonds so easy
                       and stress-free. I got a great price and
                       the
-                      transaction was secure."
+                      transaction was secure.
                     </p>
                   </div>
                 </div>
@@ -164,9 +164,9 @@ export default function Component() {
                       </div>
                     </div>
                     <p className="text-muted-foreground">
-                      "I was hesitant to sell my diamonds online, but Bidder
+                      I was hesitant to sell my diamonds online, but Bidder
                       made me feel safe and secure throughout
-                      the entire\n process. Highly recommend!"
+                      the entire\n process. Highly recommend!
                     </p>
                   </div>
                 </div>
