@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils"
 import { Providers } from "@/components/Providers"
 import PageWrapper from "@/components/PageWrapper";
-
+import CustomCursor from "@/components/CustomCursor";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -29,6 +29,7 @@ export default function RootLayout({
         <Providers>
           <PageWrapper>
               {children}
+              <CustomCursor />
           </PageWrapper>
           </Providers>
       </body>

@@ -67,3 +67,48 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* disable cursor */
+body {
+  cursor: none;
+}
+
+a, button, [role="button"] {
+  cursor: none;
+}
+/* custom scroll bar */
+/* Set the scrollbar width */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+  background: #010101; /* Make the track transparent */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #fff; /* Color of the scrollbar thumb */
+}
+
+/* Optional: Style the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fff; /* Darker shade on hover */
+}
+
+
+/* Sparkle background */
+.sparkle-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0;
+}

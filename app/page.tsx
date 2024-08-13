@@ -1,22 +1,66 @@
 'use client'
 import Link from "next/link"
-import { Card } from "@/components/ui/card"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { userIsLoggedIn } from "@/utils/auth"
-import { Metadata } from 'next'
+import { useRef } from 'react'
+import gsap from "gsap"
+import { useGSAP } from '@gsap/react'
+import SuccessSection from "@/components/layouts-sections/SuccessSection"
 
 export default function LandingPage() {
- 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const wallRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const navLinksRef = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    const wall = wallRef.current;
+    const content = contentRef.current;
+    const navLink = navLinksRef.current
+    // Set initial states
+    gsap.set(wall, { height: '0%', top: 0 });
+    gsap.set(content, { autoAlpha: 0});
+
+    const tl = gsap.timeline();
+
+    tl.to(wall, {
+      height: '100%',
+      duration: 1,
+      ease: 'power3.inOut'
+    }).to(content, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power3.out'
+    }).from(navLink, {
+      y:-50,
+      opacity: 1,
+      stagger: 0.5,
+      duration: 0.5,
+      ease: 'power3.out'
+    });
+
+  }, []); // The empty dependency array means this effect runs once on mount
+
   return (
-    <div className="flex flex-col min-h-[100dvh]">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
+    <div ref={containerRef} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden' }}>
+      <div 
+        ref={wallRef} 
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#020202', // Or any color you prefer
+          zIndex: 10
+        }}
+      />
+      <div ref={contentRef} className="flex flex-col min-h-[100dvh]" style={{ position: 'relative', zIndex: 20 }}>
+      <header className="px-4 lg:px-6 h-14 flex items-center text-[#fff]">
         <Link href="#" className="flex items-center justify-center" prefetch={false}>
           <DiamondIcon className="h-6 w-6" />
           <span className="sr-only">Bidder</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
+        <nav className="ml-auto flex gap-4 sm:gap-6 " ref={navLinksRef}>
           <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Features
           </Link>
@@ -32,7 +76,7 @@ export default function LandingPage() {
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
+        <section className="w-full py-12 md:py-24 lg:py-32 h-[100dvh] text-[#fff]">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
@@ -114,66 +158,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Success Stories</div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Hear from Our Satisfied Users</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Our customers have had great experiences with Bidder. Read their testimonials to learn more.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              <Card className="p-6 bg-muted">
-                <div className="flex items-start gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-xl font-bold">John Doe</h3>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <StarIcon className="h-4 w-4" />
-                        <span>5.0</span>
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground">
-                      Bidder made the process of selling my diamonds so easy
-                      and stress-free. I got a great price and
-                      the
-                      transaction was secure.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-              <Card className="p-6 bg-muted">
-                <div className="flex items-start gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>SA</AvatarFallback>
-                  </Avatar>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-xl font-bold">Sarah Anderson</h3>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <StarIcon className="h-4 w-4" />
-                        <span>4.8</span>
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground">
-                      I was hesitant to sell my diamonds online, but Bidder
-                      made me feel safe and secure throughout
-                      the entire\n process. Highly recommend!
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </section>
+        <SuccessSection />
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
@@ -206,6 +191,7 @@ export default function LandingPage() {
         </nav>
       </footer>
     </div>
+    </div>
   )
 }
 
@@ -229,21 +215,3 @@ function DiamondIcon(props:any) {
 }
 
 
-function StarIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  )
-}
