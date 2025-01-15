@@ -12,7 +12,6 @@ const SuccessSection = () => {
     //         opacity: 0,
     //         stagger: 0.5,
     //         ease: 'power3.inOut',
-            
     //     });
     // },[])
   return (

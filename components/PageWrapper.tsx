@@ -27,7 +27,6 @@
 //   const handleComplete = () => {
 //     setLoading(false); // Set loading to false when route change completes
 //   };
-//   console.log(router)
 // router.events.on('routeChangeStart', handleStart);
 // router.events.on('routeChangeComplete', handleComplete);
 //   // useEffect(() => {
