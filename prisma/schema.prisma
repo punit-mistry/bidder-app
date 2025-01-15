@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id             String  @id @default(auto()) @map("_id") @db.ObjectId
+  email          String
+  email_verified Boolean
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  profile_image  Json?
+  username       String
+}
