@@ -20,7 +20,6 @@ export default function LandingPage() {
       if (section) {
         const { top } = section.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        console.log(windowHeight,top)
         if (top < windowHeight * 0.8) {
           controls.start({ opacity: 1, y: 0 });
         } else {
