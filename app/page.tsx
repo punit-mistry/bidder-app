@@ -4,7 +4,6 @@ import Image from "next/image"
 import { useRef, useEffect } from 'react'
 import { motion, useAnimation } from "framer-motion"
 import SuccessSection from "@/components/layouts-sections/SuccessSection"
-import { Button } from "@/components/ui/button"
 
 export default function LandingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
