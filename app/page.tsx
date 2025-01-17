@@ -13,25 +13,25 @@ export default function LandingPage() {
   const BiddingExperience = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = BiddingExperience.current;
-      if (section) {
-        const { top } = section.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        if (top < windowHeight * 0.8) {
-          controls.start({ opacity: 1, y: 0 });
-        } else {
-          controls.start({ opacity: 0, y: 500 });
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const section = BiddingExperience.current;
+  //     if (section) {
+  //       const { top } = section.getBoundingClientRect();
+  //       const windowHeight = window.innerHeight;
+  //       if (top < windowHeight * 0.8) {
+  //         controls.start({ opacity: 1, y: 0 });
+  //       } else {
+  //         controls.start({ opacity: 0, y: 500 });
+  //       }
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [controls]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [controls]);
 
   return (
     <div ref={containerRef} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden' }}>
@@ -100,13 +100,14 @@ export default function LandingPage() {
               </div>
             </div>
           </section>
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+          <section className="w-full py-12 md:py-24 lg:py-32 bg-muted"
+         >
             <motion.div 
+               initial={{ opacity: 0, y: -50 }} 
+            whileInView={{ opacity: 1, y:0 }}
+            viewport={{amount:'all',once:true}}
               className="container px-4 md:px-6" 
-              ref={BiddingExperience} 
-              initial={{ opacity: 0, y: 50 }} 
-              animate={controls} 
-              transition={{ duration: 0.5, ease: "easeOut" }}>
+              >
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
                   <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Key Features</div>
